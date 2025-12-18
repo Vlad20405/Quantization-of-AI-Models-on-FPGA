@@ -1,0 +1,7 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "Simulate (make sim)", "type": "shell", "command": "make sim", "group": "build", "problemMatcher": [] },
+    { "label": "Clean (make clean)", "type": "shell", "command": "make clean", "problemMatcher": [] }
+  ]
+}
