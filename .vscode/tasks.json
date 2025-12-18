@@ -1,7 +1,9 @@
 {
   "version": "2.0.0",
   "tasks": [
-    { "label": "Simulate (make sim)", "type": "shell", "command": "make sim", "group": "build", "problemMatcher": [] },
+    { "label": "Simulate Dense (make sim)", "type": "shell", "command": "make sim", "group": "build", "problemMatcher": [] },
+    { "label": "Simulate Quantizer (make sim_quantizer)", "type": "shell", "command": "make sim_quantizer", "problemMatcher": [] },
+    { "label": "Simulate MAC (make sim_mac)", "type": "shell", "command": "make sim_mac", "problemMatcher": [] },
     { "label": "Clean (make clean)", "type": "shell", "command": "make clean", "problemMatcher": [] }
   ]
 }
