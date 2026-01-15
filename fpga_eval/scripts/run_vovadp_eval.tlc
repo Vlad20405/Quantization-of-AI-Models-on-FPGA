@@ -1,0 +1,32 @@
+set proj qnn_eval
+set part xc7a35tcpg236-1
+
+file mkdir fpga_eval/reports
+
+create_project $proj ./fpga_eval/vivado_$proj -part $part -force
+add_files [glob ./rtl/*.sv]
+set_property top qnn_accel_top [current_fileset]
+
+add_files -fileset constrs_1 ./fpga_eval/scripts/constraints.xdc
+update_compile_order -fileset sources_1
+
+# -------- SYNTH --------
+launch_runs synth_1 -jobs 8
+wait_on_run synth_1
+open_run synth_1
+
+report_utilization -hierarchical -file fpga_eval/reports/util_synth.rpt
+report_timing_summary -file fpga_eval/reports/timing_synth.rpt
+
+# -------- IMPL (place&route) --------
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+open_run impl_1
+
+report_utilization -hierarchical -file fpga_eval/reports/util_impl.rpt
+report_timing_summary -file fpga_eval/reports/timing_impl.rpt
+
+# -------- POWER (estimativ) --------
+report_power -file fpga_eval/reports/power_vectorless.rpt
+
+quit
